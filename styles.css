@@ -1,0 +1,77 @@
+@font-face {
+    font-family: 'Pacifico';
+    src: url(fonts/Pacifico-Regular.ttf) format('truetype');
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    background: linear-gradient(
+        to right,
+        rgb(31, 30, 44),
+        rgb(49, 57, 66)
+    );
+}
+
+.main-header {
+    
+}
+.title-heading {
+    display: flex;
+    flex: auto;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: azure;
+    font-family: 'Pacifico', sans-serif;
+    font-size: 50px;
+    margin-right: 150px;
+}
+
+.container {
+    display: flex;
+    flex: auto;
+    justify-content: center;
+    gap: 200px;
+}
+
+.settings {
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+.options {
+    border: solid white;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background-color: rgb(59, 59, 59);
+    font-family: cursive;
+
+}
+
+footer {
+    color: aliceblue;
+    text-align: center;
+    font-family: monospace;
+}
+
+#sketchpad {
+    display: flex;
+    flex: auto;
+    background-color: aliceblue;
+    width: 550px;
+    height: 550px;  
+    flex-wrap: wrap; 
+}
