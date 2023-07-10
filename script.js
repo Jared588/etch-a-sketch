@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let totalSquares = gridSize * gridSize;
   
     // Configure each square and place within the grid
-    let squareWidth = Math.floor(sketchpad.offsetWidth / gridSize);
-    let squareHeight = Math.floor(sketchpad.offsetHeight / gridSize);
+    let squareWidth = (sketchpad.offsetWidth / gridSize);
+    let squareHeight = (sketchpad.offsetHeight / gridSize);
   
     // Set grid-template-columns property to create a grid layout
     sketchpad.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;

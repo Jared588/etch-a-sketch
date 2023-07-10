@@ -69,7 +69,7 @@ footer {
 
 #sketchpad {
     display: flex;
-    flex: auto;
+    flex: 1, 0;
     background-color: aliceblue;
     width: 550px;
     height: 550px;  
