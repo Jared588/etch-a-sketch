@@ -26,6 +26,11 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('dragstart', function(event) {
       event.preventDefault(); // Disable default dragging behavior
     });
+
+    var clearBtn = document.querySelector('#clear-button');
+    clearBtn.addEventListener("click", function() {
+      clear();
+    });
   });
 
 var isDrawing = false;
@@ -50,4 +55,13 @@ function draw(event) {
       square.style.backgroundColor = 'black';
     }
   }
+}
+
+// button functions
+
+function clear() {
+  const sketchpad = document.querySelectorAll('#sketchpad > div');
+  sketchpad.forEach(function(square) {
+    square.style.backgroundColor = 'white';
+  });
 }
