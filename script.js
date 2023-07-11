@@ -28,6 +28,12 @@ document.addEventListener('DOMContentLoaded', function() {
       event.preventDefault(); // Disable default dragging behavior
     });
 
+    // color selector
+    var color = document.getElementById('color-picker');
+    color.addEventListener('input', function() {
+      pickColor(color.value);
+    });
+
     // clear
     var clearBtn = document.querySelector('#clear-button');
     clearBtn.addEventListener("click", function() {
@@ -42,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 var backgroundColor = 'white';
-var drawingColor = 'blue';
+var drawingColor = 'black';
 var isDrawing = false;
 
 // drawing functions
@@ -67,7 +73,9 @@ function draw(event) {
   }
 }
 
-// button functions
+function pickColor (color) {
+  drawingColor = color;
+}
 
 function clear() {
   const sketchpad = document.querySelectorAll('#sketchpad > div');
