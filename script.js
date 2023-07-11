@@ -22,23 +22,33 @@ document.addEventListener('DOMContentLoaded', function() {
       sketchpad.appendChild(square);
     }
 
+    // draw
     document.addEventListener('mouseup', stopDrawing);
     document.addEventListener('dragstart', function(event) {
       event.preventDefault(); // Disable default dragging behavior
     });
 
+    // clear
     var clearBtn = document.querySelector('#clear-button');
     clearBtn.addEventListener("click", function() {
       clear();
     });
+
+    // erase
+    var eraseBtn = document.querySelector('#erase-button');
+    eraseBtn.addEventListener("click", function () {
+      erase();
+    });
   });
 
+var backgroundColor = 'white';
+var drawingColor = 'blue';
 var isDrawing = false;
 
 // drawing functions
 function startDrawing (square) {
   isDrawing = true;
-  square.style.backgroundColor = 'black';
+  square.style.backgroundColor = drawingColor;
   square.addEventListener('mouseenter', draw);
   document.addEventListener('mousemove', draw);
 }
@@ -52,7 +62,7 @@ function draw(event) {
   if (isDrawing === true) {
     const square = event.target;
     if (square.matches('#sketchpad > div')) {
-      square.style.backgroundColor = 'black';
+      square.style.backgroundColor = drawingColor;
     }
   }
 }
@@ -64,4 +74,8 @@ function clear() {
   sketchpad.forEach(function(square) {
     square.style.backgroundColor = 'white';
   });
+}
+
+function erase() {
+  drawingColor = backgroundColor;
 }
