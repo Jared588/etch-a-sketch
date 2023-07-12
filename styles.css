@@ -21,9 +21,6 @@ body {
     );
 }
 
-.main-header {
-    
-}
 .title-heading {
     display: flex;
     flex: auto;
@@ -44,7 +41,6 @@ body {
 }
 
 .settings {
-    color: aliceblue;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -53,12 +49,16 @@ body {
 }
 
 .options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: aliceblue;
+    font-size: 18px;
     border: solid white;
     border-radius: 10px;
     padding: 10px 20px;
     background-color: rgb(59, 59, 59);
     font-family: cursive;
-
 }
 
 footer {
@@ -74,4 +74,9 @@ footer {
     width: 550px;
     height: 550px;  
     flex-wrap: wrap; 
+}
+
+.erase-toggle {
+    color: black;
+    background-color: aliceblue;
 }

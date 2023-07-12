@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Get the grid element
     const sketchpad = document.getElementById("sketchpad");
-    let gridSize = 64;
+    let gridSize =  10;
     let totalSquares = gridSize * gridSize;
   
     // Configure each square and place within the grid
@@ -32,6 +32,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var color = document.getElementById('color-picker');
     color.addEventListener('input', function() {
       pickColor(color.value);
+      if (eraseToggle === true) {
+        eraseToggle = false;
+        eraseBtn.classList.remove('erase-toggle');
+      } 
     });
 
     // clear
@@ -41,9 +45,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // erase
+    var eraseToggle = false;
     var eraseBtn = document.querySelector('#erase-button');
     eraseBtn.addEventListener("click", function () {
       erase();
+      if (eraseToggle === false) {
+        eraseToggle = true;
+        eraseBtn.classList.add('erase-toggle');
+      } else {
+        eraseToggle = false;
+        drawingColor = color.value;
+        eraseBtn.classList.remove('erase-toggle');
+      }
     });
   });
 
