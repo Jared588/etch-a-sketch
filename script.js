@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Get the grid element
-    const sketchpad = document.getElementById("sketchpad");
+    // default grid size
     var gridSize =  16;
-    let totalSquares = gridSize * gridSize;
 
     // size slider
     const gridSizeSlider = document.getElementById("grid-size-slider")
@@ -11,23 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
       clear();
     });
     
-    // Configure each square and place within the grid
-    let squareWidth = (sketchpad.offsetWidth / gridSize);
-    let squareHeight = (sketchpad.offsetHeight / gridSize);
-  
-    // Add event listener to each square for drawing functionality
-    for (let i = 0; i < totalSquares; i++) {
-      const square = document.createElement('div');
-      square.style.width = squareWidth + 'px';
-      square.style.height = squareHeight + 'px';
-  
-      square.addEventListener('mousedown', function() {
-        // Set the background color of the square when the mouse is pressed
-        startDrawing(square);
-      });
-
-      sketchpad.appendChild(square);
-    }
+    // create the sketchpad
+    compileSketchpad(gridSize);
 
     // draw
     document.addEventListener('mouseup', stopDrawing);
@@ -67,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+// default settings
 var backgroundColor = 'white';
 var drawingColor = 'black';
 var isDrawing = false;
@@ -108,10 +92,20 @@ function erase() {
   drawingColor = backgroundColor;
 }
 
+function reset() {
+  const sketchpad = document.getElementById('sketchpad');
+  while (sketchpad.firstChild) {
+    sketchpad.removeChild(sketchpad.firstChild);
+  }
+}
+
+// sketchpad compiler
 function compileSketchpad (gridSize) {
+  // reset and clear sketchpad
   reset();
   clear();
 
+  // set new size
   totalSquares = gridSize * gridSize;
 
   // Configure each square and place within the grid
@@ -123,18 +117,11 @@ function compileSketchpad (gridSize) {
     square.style.width = squareWidth + 'px';
     square.style.height = squareHeight + 'px';
 
+    // add drawing listeners to every square
     square.addEventListener('mousedown', function() {
-      // Set the background color of the square when the mouse is pressed
       startDrawing(square);
     });
 
     sketchpad.appendChild(square);
-  }
-}
-
-function reset() {
-  const sketchpad = document.getElementById('sketchpad');
-  while (sketchpad.firstChild) {
-    sketchpad.removeChild(sketchpad.firstChild);
   }
 }
