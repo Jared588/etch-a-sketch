@@ -1,9 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Get the grid element
     const sketchpad = document.getElementById("sketchpad");
-    let gridSize =  10;
+    var gridSize =  16;
     let totalSquares = gridSize * gridSize;
-  
+
+    // size slider
+    const gridSizeSlider = document.getElementById("grid-size-slider")
+    gridSizeSlider.addEventListener('input', function() {
+      compileSketchpad(gridSizeSlider.value);
+      clear();
+    });
+    
     // Configure each square and place within the grid
     let squareWidth = (sketchpad.offsetWidth / gridSize);
     let squareHeight = (sketchpad.offsetHeight / gridSize);
@@ -99,4 +106,35 @@ function clear() {
 
 function erase() {
   drawingColor = backgroundColor;
+}
+
+function compileSketchpad (gridSize) {
+  reset();
+  clear();
+
+  totalSquares = gridSize * gridSize;
+
+  // Configure each square and place within the grid
+  let squareWidth = (sketchpad.offsetWidth / gridSize);
+  let squareHeight = (sketchpad.offsetHeight / gridSize);
+
+  for (let i = 0; i < totalSquares; i++) {
+    const square = document.createElement('div');
+    square.style.width = squareWidth + 'px';
+    square.style.height = squareHeight + 'px';
+
+    square.addEventListener('mousedown', function() {
+      // Set the background color of the square when the mouse is pressed
+      startDrawing(square);
+    });
+
+    sketchpad.appendChild(square);
+  }
+}
+
+function reset() {
+  const sketchpad = document.getElementById('sketchpad');
+  while (sketchpad.firstChild) {
+    sketchpad.removeChild(sketchpad.firstChild);
+  }
 }
