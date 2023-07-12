@@ -32,6 +32,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var clearBtn = document.querySelector('#clear-button');
     clearBtn.addEventListener("click", function() {
       clear();
+      if (eraseToggle === true) {
+        eraseToggle = false;
+        drawingColor = color.value;
+        eraseBtn.classList.remove('erase-toggle');
+      } 
     });
 
     // erase
