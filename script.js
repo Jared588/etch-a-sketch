@@ -56,6 +56,20 @@ document.addEventListener('DOMContentLoaded', function() {
         eraseBtn.classList.remove('erase-toggle');
       }
     });
+
+    // button highlights when hovered on
+
+    var buttons = document.querySelectorAll(".options"); // select all buttons with class .btn
+
+    buttons.forEach(function(button) {
+      button.addEventListener("mouseover", function() {
+        button.classList.add('highlight');
+      });
+  
+      button.addEventListener("mouseout", function() {
+        button.classList.remove('highlight');
+      });
+    })
   });
 
 // default settings

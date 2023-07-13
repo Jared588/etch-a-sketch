@@ -80,3 +80,7 @@ footer {
     color: black;
     background-color: aliceblue;
 }
+
+.highlight {
+    transform: scale(1.1);
+}
