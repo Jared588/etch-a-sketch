@@ -1,14 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
     // default grid size
     var gridSize =  16;
+    document.getElementById("grid-size-label").innerHTML = `${gridSize} x ${gridSize}`;
 
     // size slider
     const gridSizeSlider = document.getElementById("grid-size-slider")
     gridSizeSlider.addEventListener('input', function() {
+      var newGridSize = gridSizeSlider.value;
+      document.getElementById("grid-size-label").innerHTML = `${newGridSize} x ${newGridSize}`;
       compileSketchpad(gridSizeSlider.value);
       clear();
     });
-    
+
     // create the sketchpad
     compileSketchpad(gridSize);
 
