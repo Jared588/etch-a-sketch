@@ -76,7 +76,7 @@ footer {
     flex-wrap: wrap; 
 }
 
-.erase-toggle {
+.toggle {
     color: black;
     background-color: aliceblue;
 }

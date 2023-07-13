@@ -27,19 +27,29 @@ document.addEventListener('DOMContentLoaded', function() {
       pickColor(color.value);
       if (eraseToggle === true) {
         eraseToggle = false;
-        eraseBtn.classList.remove('erase-toggle');
-      } 
+        eraseBtn.classList.remove('toggle');
+      }
+      if (rainbowToggle) {
+        rainbowToggle = false;
+        drawingColor = color.value;
+        rainbowBtn.classList.remove('toggle');
+      }
     });
 
     // clear
     var clearBtn = document.querySelector('#clear-button');
     clearBtn.addEventListener("click", function() {
       clear();
-      if (eraseToggle === true) {
+      if (eraseToggle) {
         eraseToggle = false;
         drawingColor = color.value;
-        eraseBtn.classList.remove('erase-toggle');
-      } 
+        eraseBtn.classList.remove('toggle');
+      }
+      if (rainbowToggle) {
+        rainbowToggle = false;
+        drawingColor = color.value;
+        rainbowBtn.classList.remove('toggle');
+      }
     });
 
     // erase
@@ -49,16 +59,19 @@ document.addEventListener('DOMContentLoaded', function() {
       erase();
       if (eraseToggle === false) {
         eraseToggle = true;
-        eraseBtn.classList.add('erase-toggle');
+        eraseBtn.classList.add('toggle');
       } else {
         eraseToggle = false;
         drawingColor = color.value;
-        eraseBtn.classList.remove('erase-toggle');
+        eraseBtn.classList.remove('toggle');
+      }
+      if (rainbowToggle) {
+        rainbowToggle = false;
+        rainbowBtn.classList.remove('toggle');
       }
     });
 
     // button highlights when hovered on
-
     var buttons = document.querySelectorAll(".options"); // select all buttons with class .btn
 
     buttons.forEach(function(button) {
@@ -69,7 +82,23 @@ document.addEventListener('DOMContentLoaded', function() {
       button.addEventListener("mouseout", function() {
         button.classList.remove('highlight');
       });
-    })
+    });
+
+    // rainbow mode
+    var rainbowBtn = document.querySelector('#rainbow-button');
+    rainbowBtn.addEventListener('click', function () {
+      if (rainbowToggle === false) {
+        rainbowToggle = true;
+        rainbowBtn.classList.add('toggle');
+      } else {
+        rainbowToggle = false;
+        rainbowBtn.classList.remove('toggle');
+      }
+      if (eraseToggle) {
+        eraseToggle = false;
+        eraseBtn.classList.remove('toggle');
+      }
+    });
   });
 
 // default settings
@@ -78,23 +107,22 @@ var drawingColor = 'black';
 var isDrawing = false;
 
 // drawing functions
-function startDrawing (square) {
+function startDrawing () {
   isDrawing = true;
-  square.style.backgroundColor = drawingColor;
-  square.addEventListener('mouseenter', draw);
-  document.addEventListener('mousemove', draw);
 }
 
 function stopDrawing () {
   isDrawing = false;
-  document.removeEventListener('mousemove', draw);
 }
 
-function draw(event) {
+rainbowToggle = false;
+function draw() {
   if (isDrawing === true) {
     const square = event.target;
-    if (square.matches('#sketchpad > div')) {
+    if (square.matches('#sketchpad > div') && (rainbowToggle === false)) {
       square.style.backgroundColor = drawingColor;
+    } else {
+      square.style.backgroundColor = getRandomColor();
     }
   }
 }
@@ -141,9 +169,22 @@ function compileSketchpad (gridSize) {
 
     // add drawing listeners to every square
     square.addEventListener('mousedown', function() {
-      startDrawing(square);
+      startDrawing();
+      draw();
     });
+    square.addEventListener('mouseup', stopDrawing);
+    square.addEventListener('mouseenter', draw);
 
     sketchpad.appendChild(square);
   }
+}
+
+// Utility function to generate a random color
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
