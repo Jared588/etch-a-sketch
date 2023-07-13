@@ -105,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
 var backgroundColor = 'white';
 var drawingColor = 'black';
 var isDrawing = false;
+rainbowToggle = false;
 
 // drawing functions
 function startDrawing () {
@@ -115,7 +116,6 @@ function stopDrawing () {
   isDrawing = false;
 }
 
-rainbowToggle = false;
 function draw() {
   if (isDrawing === true) {
     const square = event.target;
@@ -158,7 +158,7 @@ function compileSketchpad (gridSize) {
   // set new size
   totalSquares = gridSize * gridSize;
 
-  // Configure each square and place within the grid
+  // configure each square and place within the grid
   let squareWidth = (sketchpad.offsetWidth / gridSize);
   let squareHeight = (sketchpad.offsetHeight / gridSize);
 
@@ -179,7 +179,7 @@ function compileSketchpad (gridSize) {
   }
 }
 
-// Utility function to generate a random color
+// utility function to generate a random color
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
   var color = '#';
